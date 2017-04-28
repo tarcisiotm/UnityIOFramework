@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7FFB10E6-F755-4390-8860-6B8DFDAB6B0E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SimpleIOFramework</RootNamespace>
+    <AssemblyName>SimpleIOFramework</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Assets\Plugins</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Assets\Plugins</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\..\Unity 5.6 DLL\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\Unity 5.6 DLL\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\Unity DLL\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TextMeshPro">
+      <HintPath>..\..\..\Kana\Assets\Plugins\TextMesh Pro\Plugins\TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Constants.cs" />
+    <Compile Include="Scripts\EncryptionHandler.cs" />
+    <Compile Include="Scripts\IOHandler.cs" />
+    <Compile Include="Scripts\TestScript.cs" />
+    <Compile Include="Scripts\CSV\CSVFile.cs" />
+    <Compile Include="Scripts\core\IOManager.cs" />
+    <Compile Include="Scripts\util\IOExtensions.cs" />
+    <Compile Include="Scripts\util\IOPlayerPref.cs" />
+    <Compile Include="Scripts\util\IOPlayerPrefs.cs" />
+    <Compile Include="Scripts\util\IOUtils.cs" />
+    <Compile Include="Scripts\localization\Components\LocalizedComponent.cs" />
+    <Compile Include="Scripts\localization\Components\LocalizedText.cs" />
+    <Compile Include="Scripts\localization\Language.cs" />
+    <Compile Include="Scripts\localization\LocalizationManager.cs" />
+    <Compile Include="Scripts\localization\LocalizedFileHelper.cs" />
+    <Compile Include="Scripts\localization\Components\LocalizedTMPro.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+    <Folder Include="Scripts\localization\" />
+    <Folder Include="Scripts\localization\Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\.DS_Store" />
+    <None Include="Scripts\CSV\.DS_Store" />
+    <None Include="Scripts\core\.DS_Store" />
+    <None Include="Scripts\util\.DS_Store" />
+  </ItemGroup>
+</Project>
