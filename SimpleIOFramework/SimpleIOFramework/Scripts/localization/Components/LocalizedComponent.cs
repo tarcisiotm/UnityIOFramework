@@ -16,20 +16,24 @@ namespace IO.Localization{
 
         bool m_foundKey = false;
        
-        protected override IEnumerator Start () {
+        protected override void Start () {
             if (m_localizationHelper != null)
             {
-                yield return new WaitUntil(m_localizationHelper.IsReady);
-                m_text = m_localizationHelper.GetLocalizedString(m_key);
-                m_foundKey = true;
-                Debug.Log("Key: " + m_text);
-                OnReady();
+                StartCoroutine(WaitForLocalizationHelper());
             }
             else
             {
-                StartCoroutine(base.Start());
+                base.Start();
             }
-            yield break;
+        }
+
+        IEnumerator WaitForLocalizationHelper(){
+            yield return null;
+            //yield return new WaitUntil(m_localizationHelper.IsReady);
+            m_text = m_localizationHelper.GetLocalizedString(m_key);
+            m_foundKey = true;
+            //Debug.Log("Key: " + m_text);
+            OnReady();
         }
 
         protected override void ParseLine (string p_line)

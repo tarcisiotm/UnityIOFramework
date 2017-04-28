@@ -14,11 +14,10 @@ namespace IO.Localization{
         bool m_ready = false;
         public bool Ready {get { return m_ready;} }
 
-        protected override IEnumerator Start()
+        protected override void Start()
         {
-            StartCoroutine(base.Start());
+            base.Start();
             m_ready = true;
-            yield break;
         }
 
         public bool IsReady(){

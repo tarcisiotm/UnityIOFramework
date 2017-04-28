@@ -51,7 +51,6 @@
     <Compile Include="Scripts\Constants.cs" />
     <Compile Include="Scripts\EncryptionHandler.cs" />
     <Compile Include="Scripts\IOHandler.cs" />
-    <Compile Include="Scripts\TestScript.cs" />
     <Compile Include="Scripts\CSV\CSVFile.cs" />
     <Compile Include="Scripts\core\IOManager.cs" />
     <Compile Include="Scripts\util\IOExtensions.cs" />

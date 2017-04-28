@@ -36,6 +36,7 @@ namespace IO.Localization{
             if (types == null || types.Count() == 0)
             {
                 Debug.Log("Component Not Available!");
+                ShowPopup("Error","TextMeshPro not available");
                 return null;
             }
 
@@ -57,6 +58,10 @@ namespace IO.Localization{
             return null;
         }
 
+        static void ShowPopup(string p_title, string p_message, string p_ok = "Ok"){
+            EditorUtility.DisplayDialog(p_title, p_message, p_ok);
+        }
+
         [MenuItem("GameObject/UI/Localization/LocalizedTextMeshProUGUI", true)]
         public static bool CheckCreateTextMeshButton(){
             var types = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
@@ -66,7 +71,8 @@ namespace IO.Localization{
 
             if (types == null || types.Count() == 0)
             {
-                Debug.Log("Component Not Available!");
+                //ShowPopup("Error","TextMeshPro not available");
+                Debug.Log("TextMeshPro Component Not Available!");
                 return false;
             }
 

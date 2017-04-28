@@ -4,16 +4,14 @@
 [Tt]emp/
 [Oo]bj/
 [Bb]uild
-<<<<<<< HEAD
-=======
+[Bb]uilds/
 [Pp]rojectSettings/
 /[Ll]ibrary/
 sysinfo.txt
 *.stackdump
 /Assets/AssetStoreTools*
 /Assets/[Pp]lug[Ii]ns/[Pp]aid/
-[Bb]uilds/
-=======
+
  
 # ============================================= #
 # Visual Studio / MonoDevelop / Rider generated #

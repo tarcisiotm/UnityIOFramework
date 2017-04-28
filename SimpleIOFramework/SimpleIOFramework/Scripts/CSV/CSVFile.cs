@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using IO;
 using System.IO;
+using Localization;
 
 namespace IO
 {
@@ -50,16 +51,14 @@ namespace IO
 
 		protected string m_csvFile;
 
-        protected virtual IEnumerator Start ()
+        protected virtual void Start ()
 		{
-
 			if (m_OnStart)
 			{
 				ParseFile ();
 			}
 
             OnReady();
-            yield break;
 		}
 
         protected virtual void OnReady(){
@@ -73,7 +72,7 @@ namespace IO
 		protected void ParseFile ()
 		{
 			string fullpath = GetFullPath ();
-            print(fullpath);
+            Debug.Log("Fullpath: "+fullpath);
 
             m_fileLoaded = IOManager.LoadAndParseTextFromResources(fullpath, m_IgnoreFirstLine, ParseLine);
 		}
@@ -89,7 +88,7 @@ namespace IO
 			string fullpath = "";
             string filename = m_fileName;
 
-            /*Language language = null;
+            Language language = null;
             if (m_lookForTranslation)
             {
                 language = CheckLanguageManager();
@@ -97,23 +96,23 @@ namespace IO
 
 			if (language != null) {
                 filename += m_localizationSeparator + language.FolderPath;
-			}*/
+			}
 
             fullpath = preffix + filename;
 
 			return fullpath;
 		}
 
-		/*Language CheckLanguageManager()
+		Language CheckLanguageManager()
 		{
             if (LocalizationManager.Instance != null)
 			{
-				m_language = LocalizationManager.Instance.LanguageInUse;
-				print ("Language Manager file exists");
-                return m_language;
+				//m_language = LocalizationManager.Instance.LanguageInUse;
+				//print ("Language Manager file exists");
+                return LocalizationManager.Instance.LanguageInUse;;
 			}
 			return null;
-		}*/
+		}
 
 		void ProcessString (string p_line)
 		{

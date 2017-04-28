@@ -15,8 +15,8 @@ namespace Localization
 		[SerializeField]
 		string m_languageSettingPath;
 
-        LocalizationManager m_instance;
-        LocalizationManager Instance {get { return m_instance;}}
+        static LocalizationManager m_instance;
+        public static LocalizationManager Instance {get { return m_instance;}}
 
 		[SerializeField]
 		string m_saveFileName = "languageSetting";
@@ -70,7 +70,7 @@ namespace Localization
 		void InitLanguage()
 		{
 			string output = string.Empty;
-			bool fileExists = IOHandler.Instance.LoadFile (m_saveFileName, out output, m_languageSettingPath, false);
+            bool fileExists = IOManager.LoadFile (m_saveFileName, out output, m_languageSettingPath);
 			print ("Output: "+output);
 
 			if (!fileExists)
@@ -106,7 +106,7 @@ namespace Localization
 
 			print ("Output as JSON: " + output);
 
-			result = IOHandler.Instance.SaveFile (m_saveFileName, output, m_languageSettingPath ,true, false);
+            result = IOManager.SaveFile (m_saveFileName, output, m_languageSettingPath ,true, false);
 
 			if (result) {
 				print ("File saved successfully!: " + output);
@@ -115,5 +115,12 @@ namespace Localization
 			return result;
 		}
 
+        public void SetLanguage(Language p_newLanguage){
+            if(m_languages.Contains(p_newLanguage) && p_newLanguage != LanguageInUse){
+                m_currentLanguage = p_newLanguage;
+                SaveLanguageFile(p_newLanguage);
+                //Notify components
+            }
+        }
 	}
 }
