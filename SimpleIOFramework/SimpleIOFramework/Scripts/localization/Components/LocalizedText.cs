@@ -3,18 +3,21 @@ using UnityEngine.UI;
 
 namespace IO.Localization{
     
+    [RequireComponent(typeof(Text))]
     public class LocalizedText : LocalizedComponent {
-        
+
         protected override void OnReady()
         {
             base.OnReady();
             Text txt = GetComponent<Text>();
-            Debug.Log("On Ready");
-            if (txt != null)
-            {
-                GetComponent<Text>().text = m_text;
-            }
+            txt.text = m_text;      
         }
 
+        public override void ResetContent()
+        {
+            base.ResetContent();
+            Start();
+        }
+       
     }
 }

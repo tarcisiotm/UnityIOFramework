@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using IO;
 using System.IO;
-using Localization;
+using IO.Localization;
 
 namespace IO
 {
@@ -56,9 +56,7 @@ namespace IO
 			if (m_OnStart)
 			{
 				ParseFile ();
-			}
-
-            OnReady();
+			}           
 		}
 
         protected virtual void OnReady(){
@@ -72,9 +70,11 @@ namespace IO
 		protected void ParseFile ()
 		{
 			string fullpath = GetFullPath ();
-            Debug.Log("Fullpath: "+fullpath);
+            //Debug.Log("Fullpath: "+fullpath);
 
             m_fileLoaded = IOManager.LoadAndParseTextFromResources(fullpath, m_IgnoreFirstLine, ParseLine);
+
+            OnReady();
 		}
 
 		protected virtual void ParseLine (string p_line)

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using IO.Extensions;
+﻿using UnityEngine;
 
 namespace IO{
 
@@ -15,9 +12,9 @@ namespace IO{
             IOManager.SaveBytesToFile ("test1encrypted", test1);
 
 			string output;
-            IOManager.LoadFile ("test1", out output, false);
+            IOManager.LoadFile ("test1", out output, null, false);
 			print ("Output: " + output);
-            IOManager.LoadFile ("test1encrypted", out output, true);
+            IOManager.LoadFile ("test1encrypted", out output, null, true);
 			print ("Output decrypted: " + output);
 
             Debug.Log("Path: "+IOUtils.GetPath("Persistent"));

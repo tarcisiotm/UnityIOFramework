@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Localization;
+using IO.Localization;
 
 [RequireComponent(typeof(Button))]
 public class SampleLocalizationToggle : MonoBehaviour {
@@ -14,37 +14,30 @@ public class SampleLocalizationToggle : MonoBehaviour {
         m_button.onClick.AddListener(OnClick);
     }
 
-    void OnClick(){
-    }
 	// Use this for initialization
 	void Start () {
         m_localizationManager = LocalizationManager.Instance;
-   
-
 	}
 
-    void NextLanguage(){
+    void OnClick(){
         
         if (m_localizationManager.m_languages.Count < 2)
         {
             return;
         }
+      
+        int index = m_localizationManager.m_languages.IndexOfLanguage(m_localizationManager.LanguageInUse);
 
-        bool foundLanguageInUse = false;
-        for (int i = 0; i < m_localizationManager.m_languages.Count; i++)
+        if (index < 0)
         {
-            if (foundLanguageInUse)
-            {
-               //set language
-            }
-            if (m_localizationManager.m_languages[i] == m_localizationManager.LanguageInUse)
-            {
-                foundLanguageInUse = true;
-                if(i == m_localizationManager.m_languages.Count -1){
-                   //set language
-                }
-            }
-        }       
+            Debug.Log("Index: " + index + "   " + m_localizationManager.m_languages.Count + "   " + m_localizationManager.LanguageInUse.Name);
+            return;
+        }
+
+        index = index + 1 == m_localizationManager.m_languages.Count ? 0 : index + 1;
+
+        m_localizationManager.SetLanguage(m_localizationManager.m_languages[index]);
+        GetComponentInChildren<LocalizedText>().ResetContent();
     }
 	
 	// Update is called once per frame

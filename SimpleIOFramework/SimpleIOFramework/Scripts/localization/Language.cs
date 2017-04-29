@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Localization
+namespace IO.Localization
 {
 	[System.Serializable]
 	public class Language {

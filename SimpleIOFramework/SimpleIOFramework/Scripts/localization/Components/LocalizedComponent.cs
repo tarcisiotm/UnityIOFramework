@@ -14,9 +14,10 @@ namespace IO.Localization{
 
         protected string m_text;
 
-        bool m_foundKey = false;
-       
+        bool m_foundKey;
+
         protected override void Start () {
+            m_foundKey = false;
             if (m_localizationHelper != null)
             {
                 StartCoroutine(WaitForLocalizationHelper());
@@ -38,6 +39,7 @@ namespace IO.Localization{
 
         protected override void ParseLine (string p_line)
         {
+            //print("Line: " + p_line + "  " + m_foundKey);
             if (m_foundKey)
             {
                 return;
@@ -46,13 +48,18 @@ namespace IO.Localization{
                 KeyValuePair<string, string> pair = IOUtils.ParseLine(p_line, m_delimiterChar);
                 if (pair.Key == m_key)
                 {
+                    //print("key: " + pair.Value);
                     m_text = pair.Value;
                     m_foundKey = true;
                 }
             }
         }
 
-    
+        /// <summary>
+        /// Resets the content when a new language when switching to a new language.
+        /// </summary>
+        public virtual void ResetContent(){
+        }
 
     }
 }

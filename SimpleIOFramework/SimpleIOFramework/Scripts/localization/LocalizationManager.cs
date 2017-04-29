@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using IO;
 
-namespace Localization
+namespace IO.Localization
 {
     public class LocalizationManager : MonoBehaviour
 	{
@@ -71,23 +71,23 @@ namespace Localization
 		{
 			string output = string.Empty;
             bool fileExists = IOManager.LoadFile (m_saveFileName, out output, m_languageSettingPath);
-			print ("Output: "+output);
+			//print ("Output: "+output);
 
 			if (!fileExists)
 			{
 				m_currentLanguage = GetFirstLanguage ();
 				SaveLanguageFile (m_currentLanguage);
-                print ("Current Language from default value: " + m_currentLanguage.Name);
+                //print ("Current Language from default value: " + m_currentLanguage.Name);
 				return;
 			}
 	
 			try{
 				m_currentLanguage = JsonUtility.FromJson<Language> (output);
-				print ("Current language from json: " + m_currentLanguage.FolderPath);
+				//print ("Current language from json: " + m_currentLanguage.FolderPath);
 			}
 			catch(System.Exception ex)
 			{
-				print ("Could not fetch JSON: "+ex.StackTrace);
+                Debug.LogError ("Could not fetch JSON: "+ex.StackTrace);
 			}
 		
 		}
@@ -98,18 +98,18 @@ namespace Localization
 
 			if (p_newLanguage == null || m_languages == null || m_languages.Count == 0 || !m_languages.Contains(p_newLanguage))
 			{
-				print ("Problem getting the first language");
+                Debug.LogError ("Problem getting the first language");
 				return false;
 			}
 
 			string output = JsonUtility.ToJson(p_newLanguage);
 
-			print ("Output as JSON: " + output);
+			//print ("Output as JSON: " + output);
 
             result = IOManager.SaveFile (m_saveFileName, output, m_languageSettingPath ,true, false);
 
 			if (result) {
-				print ("File saved successfully!: " + output);
+				//print ("File saved successfully!: " + output);
 			}
 
 			return result;
@@ -123,4 +123,28 @@ namespace Localization
             }
         }
 	}
+
+    public static class LocalizationManagerExtensions{
+
+        public static int IndexOfLanguage(this List<Language> p_list, Language p_language){
+            for (int i = 0; i < p_list.Count; i++)
+            {
+                if (IsEqualLanguage(p_list[i], p_language))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public static bool IsEqualLanguage(Language p_firstLanguage, Language p_secondLanguage){
+            if (p_firstLanguage.FolderPath == p_secondLanguage.FolderPath &&
+               p_firstLanguage.Name == p_secondLanguage.Name)
+            {
+                return true;
+            }
+            return false;
+        }
+
+    }
 }
