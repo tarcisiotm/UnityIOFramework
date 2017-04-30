@@ -93,6 +93,25 @@ namespace IO{
         #endregion Load
 
 
+        #region Delete
+
+        /// <summary>
+        /// Deletes all data saved to PlayerPrefs.
+        /// </summary>
+        public static void DeleteAll(){
+            PlayerPrefs.DeleteAll();
+        }
+
+        /// <summary>
+        /// Deletes the key saved to PlayerPrefs.
+        /// </summary>
+        /// <param name="p_key">The key to be deleted.</param>
+        public static void DeleteKey(string p_key){
+            PlayerPrefs.DeleteKey(p_key);
+        }
+
+        #endregion Delete
+
         #endregion PlayerPrefs
     }
 }

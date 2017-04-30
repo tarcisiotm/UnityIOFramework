@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using IO;
+using System;
 
 namespace IO.Localization
 {
     public class LocalizationManager : MonoBehaviour
 	{
+        [SerializeField]
+        bool m_saveToPlayerPrefs = true;
 		//TODO check for / on the beginning and end of path strings
         [SerializeField]
         bool m_dontDestroyOnLoad = false;
@@ -23,6 +26,7 @@ namespace IO.Localization
 
 		public List<Language> m_languages;
 
+        [SerializeField]
 		Language m_currentLanguage;
 
 		public Language LanguageInUse { get { return m_currentLanguage; }}
@@ -66,8 +70,36 @@ namespace IO.Localization
 			}
 			return null;
 		}
+        #region Load
+        void InitLanguage(){
+            
+            if (m_languages == null || m_languages.Count == 0)
+            {
+                Debug.LogWarning("There are no languages available!");
+                return;
+            }
 
-		void InitLanguage()
+            if (m_saveToPlayerPrefs)
+            {
+                InitLanguageFromPlayerPrefs();
+            }
+            else
+            {
+                InitLanguageFromFile();
+            }
+        }
+
+        void InitLanguageFromPlayerPrefs(){
+            string id = IOPlayerPrefs.LoadString(m_saveFileName, m_languages[0].ID);
+            //Debug.Log("Default value: " + id);
+            m_currentLanguage =  GetLanguageByID(id);
+            if (m_currentLanguage != null)
+            {
+                SaveLanguage(m_currentLanguage);
+            }
+        }
+
+		void InitLanguageFromFile()
 		{
 			string output = string.Empty;
             bool fileExists = IOManager.LoadFile (m_saveFileName, out output, m_languageSettingPath);
@@ -76,7 +108,7 @@ namespace IO.Localization
 			if (!fileExists)
 			{
 				m_currentLanguage = GetFirstLanguage ();
-				SaveLanguageFile (m_currentLanguage);
+				SaveLanguageToFile (m_currentLanguage);
                 //print ("Current Language from default value: " + m_currentLanguage.Name);
 				return;
 			}
@@ -91,16 +123,28 @@ namespace IO.Localization
 			}
 		
 		}
+        #endregion Load
 
-		bool SaveLanguageFile(Language p_newLanguage)
+        #region Save
+        bool SaveLanguage(Language p_newLanguage){
+          
+            if (p_newLanguage == null || m_languages == null || m_languages.Count == 0 || !m_languages.Contains(p_newLanguage))
+            {
+                Debug.LogError ("Problem getting the first language");
+                return false;
+            }
+
+            return m_saveToPlayerPrefs ? SaveLanguageToPlayerPrefs(p_newLanguage) : SaveLanguageToFile(p_newLanguage);
+        }
+
+        bool SaveLanguageToPlayerPrefs(Language p_newLanguage){
+            IOPlayerPrefs.SaveString(m_saveFileName, p_newLanguage.ID);
+            return false;
+        }
+
+		bool SaveLanguageToFile(Language p_newLanguage)
 		{
 			bool result = false;
-
-			if (p_newLanguage == null || m_languages == null || m_languages.Count == 0 || !m_languages.Contains(p_newLanguage))
-			{
-                Debug.LogError ("Problem getting the first language");
-				return false;
-			}
 
 			string output = JsonUtility.ToJson(p_newLanguage);
 
@@ -114,14 +158,29 @@ namespace IO.Localization
 
 			return result;
 		}
+        #endregion Save
 
         public void SetLanguage(Language p_newLanguage){
             if(m_languages.Contains(p_newLanguage) && p_newLanguage != LanguageInUse){
                 m_currentLanguage = p_newLanguage;
-                SaveLanguageFile(p_newLanguage);
+                SaveLanguage(p_newLanguage);
                 //Notify components
             }
         }
+
+        #region Util
+        public Language GetLanguageByID(string p_id){
+            for (int i = 0; i < m_languages.Count; i++)
+            {
+                //Debug.Log(m_languages[i].ID + "   " + p_id);
+                if (m_languages[i].ID == p_id)
+                {
+                    return m_languages[i];
+                }
+            }
+            return null;
+        }
+        #endregion Util
 	}
 
     public static class LocalizationManagerExtensions{
@@ -138,8 +197,8 @@ namespace IO.Localization
         }
 
         public static bool IsEqualLanguage(Language p_firstLanguage, Language p_secondLanguage){
-            if (p_firstLanguage.FolderPath == p_secondLanguage.FolderPath &&
-               p_firstLanguage.Name == p_secondLanguage.Name)
+            if (p_firstLanguage.ID == p_secondLanguage.ID &&
+               p_firstLanguage.Description == p_secondLanguage.Description)
             {
                 return true;
             }

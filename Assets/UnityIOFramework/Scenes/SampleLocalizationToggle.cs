@@ -30,7 +30,7 @@ public class SampleLocalizationToggle : MonoBehaviour {
 
         if (index < 0)
         {
-            Debug.Log("Index: " + index + "   " + m_localizationManager.m_languages.Count + "   " + m_localizationManager.LanguageInUse.Name);
+            Debug.Log("Index: " + index + "   " + m_localizationManager.m_languages.Count + "   " + m_localizationManager.LanguageInUse.Description);
             return;
         }
 

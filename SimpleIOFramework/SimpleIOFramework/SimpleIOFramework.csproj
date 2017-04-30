@@ -53,7 +53,6 @@
     <Compile Include="Scripts\CSV\CSVFile.cs" />
     <Compile Include="Scripts\core\IOManager.cs" />
     <Compile Include="Scripts\util\IOExtensions.cs" />
-    <Compile Include="Scripts\util\IOPlayerPref.cs" />
     <Compile Include="Scripts\util\IOPlayerPrefs.cs" />
     <Compile Include="Scripts\util\IOUtils.cs" />
     <Compile Include="Scripts\localization\Components\LocalizedComponent.cs" />

@@ -95,7 +95,7 @@ namespace IO
             }
 
 			if (language != null) {
-                filename += m_localizationSeparator + language.FolderPath;
+                filename += m_localizationSeparator + language.ID;
 			}
 
             fullpath = preffix + filename;

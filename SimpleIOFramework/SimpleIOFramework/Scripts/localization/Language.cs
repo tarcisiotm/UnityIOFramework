@@ -8,12 +8,12 @@ namespace IO.Localization
 	public class Language {
 
 		[SerializeField]
-		string m_language;
+        string m_description;
 		[SerializeField]
-		string m_folderPath;
+        string m_ID;
 
-		public string Name { get { return m_language;}}
-		public string FolderPath { get { return m_folderPath;}}
+		public string Description { get { return m_description;}}
+		public string ID { get { return m_ID;}}
 
 	}
 }
