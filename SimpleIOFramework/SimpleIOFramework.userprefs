@@ -2,10 +2,12 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="SimpleIOFramework/Scripts/localization/LocalizationManager.cs">
     <Files>
-      <File FileName="SimpleIOFramework/Scripts/localization/LocalizationManager.cs" Line="91" Column="107" />
-      <File FileName="SimpleIOFramework/Scripts/core/IOManager.cs" Line="1" Column="1" />
-      <File FileName="SimpleIOFramework/Scripts/util/IOPlayerPrefs.cs" Line="1" Column="1" />
-      <File FileName="SimpleIOFramework/Scripts/localization/Language.cs" Line="15" Column="28" />
+      <File FileName="SimpleIOFramework/Scripts/localization/LocalizationManager.cs" Line="28" Column="27" />
+      <File FileName="SimpleIOFramework/Scripts/core/IOManager.cs" Line="117" Column="35" />
+      <File FileName="SimpleIOFramework/Scripts/util/IOPlayerPrefs.cs" Line="108" Column="54" />
+      <File FileName="SimpleIOFramework/Scripts/localization/Language.cs" Line="1" Column="1" />
+      <File FileName="SimpleIOFramework/Scripts/localization/Components/LocalizedComponent.cs" Line="27" Column="24" />
+      <File FileName="SimpleIOFramework/Scripts/CSV/CSVFile.cs" Line="111" Column="7" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

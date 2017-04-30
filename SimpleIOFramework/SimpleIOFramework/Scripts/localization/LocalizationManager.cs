@@ -24,6 +24,9 @@ namespace IO.Localization
 		[SerializeField]
 		string m_saveFileName = "languageSetting";
 
+        [SerializeField]
+        string m_languagePlayerPrefsKey = "LocalizationManager::languageSetting";
+
 		public List<Language> m_languages;
 
         [SerializeField]
@@ -90,7 +93,7 @@ namespace IO.Localization
         }
 
         void InitLanguageFromPlayerPrefs(){
-            string id = IOPlayerPrefs.LoadString(m_saveFileName, m_languages[0].ID);
+            string id = IOPlayerPrefs.LoadString(m_languagePlayerPrefsKey, m_languages[0].ID);
             //Debug.Log("Default value: " + id);
             m_currentLanguage =  GetLanguageByID(id);
             if (m_currentLanguage != null)
@@ -138,7 +141,7 @@ namespace IO.Localization
         }
 
         bool SaveLanguageToPlayerPrefs(Language p_newLanguage){
-            IOPlayerPrefs.SaveString(m_saveFileName, p_newLanguage.ID);
+            IOPlayerPrefs.SaveString(m_languagePlayerPrefsKey, p_newLanguage.ID);
             return false;
         }
 
