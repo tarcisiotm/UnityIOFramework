@@ -29,7 +29,6 @@ namespace IO.Localization
 
 		public List<Language> m_languages;
 
-        [SerializeField]
 		Language m_currentLanguage;
 
 		public Language LanguageInUse { get { return m_currentLanguage; }}
